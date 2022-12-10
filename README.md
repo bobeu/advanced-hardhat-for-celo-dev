@@ -1,13 +1,63 @@
 # Sample Hardhat Project
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This project demonstrates advanced Hardhat usage, And was made for tutorial purpose for Celo developers.
 
-Try running some of the following tasks:
+`Note`: The source code is not audited and so, do not deploy to production.
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
+# How to run and test
+
+- **Clone the repository**
+
 ```
+git clone https://github.com/bobeu/advanced-hardhat-for-celo-dev.git
+
+```
+
+Then: 
+
+```
+cd advanced-hardhat-for-celo-dev
+
+```
+
+- **Install dependencies**
+
+```
+yarn install (preferably)
+
+```
+
+Or
+
+```
+npm install
+
+```
+
+- **Compiling**
+
+```
+npx hardhat compile
+
+```
+
+- Deployment (Alfrajores - Celo testnet)
+
+Before running the command, create a folder called `deployments` in the project's root if it does not exist before.
+
+```
+npx hardhat deploy --network alfajores
+
+```
+
+-  **Testing**
+
+```
+npx hardhat test
+
+```
+
+# Resources
+
+- [Celo developer resources](https://docs.celo.org/developer/)
+- [Official Hardhat doc](https://hardhat.org)
