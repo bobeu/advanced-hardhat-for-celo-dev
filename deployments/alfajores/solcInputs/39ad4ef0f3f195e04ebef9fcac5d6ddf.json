@@ -1,0 +1,41 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Bank.sol": {
+      "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.9;\n\nimport \"./interfaces/IBeneficiary.sol\";\n\ncontract Bank {\n    uint public unlockTime;\n    address public immutable beneficiary;\n\n    event Withdrawal(uint amount, uint when);\n\n    constructor(uint _unlockTime, address _beneficiary) payable {\n        require(\n            block.timestamp < _unlockTime,\n            \"Unlock time should be in the future\"\n        );\n        require(\n           _beneficiary != address(0),\n            \"Beneficiary is zero address\"\n        );\n\n        unlockTime = _unlockTime;\n        beneficiary = _beneficiary;\n    }\n\n    function withdraw() external {\n        // Uncomment this line, and the import of \"hardhat/console.sol\", to print a log in your terminal\n        // console.log(\"Unlock time is %o and block timestamp is %o\", unlockTime, block.timestamp);\n\n        require(block.timestamp >= unlockTime, \"You can't withdraw yet\");\n        require(IBeneficiary(beneficiary).getApproval(msg.sender), \"You're not a beneficiary\");\n\n        emit Withdrawal(address(this).balance, block.timestamp);\n\n        payable(msg.sender).transfer(address(this).balance);\n    }\n}\n"
+    },
+    "contracts/Beneficiaries.sol": {
+      "content": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity ^0.8.9;\r\n\r\ncontract Beneficiaries {\r\n  address immutable owner;\r\n  \r\n  address immutable child_1;\r\n  address immutable child_2;\r\n\r\n  mapping (address => bool) public approval;\r\n\r\n  constructor (address _child_1, address _child_2) {\r\n    require(_child_1 != address(0) && _child_2 != address(0), \"Children addresses are empty\");\r\n    child_1 = _child_2;\r\n    child_2 = _child_2;\r\n    owner = msg.sender;\r\n  }\r\n\r\n  function getApproval(address child) external view returns(bool) {\r\n    return approval[child];\r\n  }\r\n\r\n  function approve(address child, bool _approval) public {\r\n    require(msg.sender == owner, \"Caller not owner\");\r\n    require(child == child_1 || child == child_2, \"Child not recognized\");\r\n    approval[child] = _approval;\r\n  }\r\n\r\n}\r\n"
+    },
+    "contracts/interfaces/IBeneficiary.sol": {
+      "content": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity ^0.8.9;\r\n\r\ninterface IBeneficiary {\r\n  function getApproval(address) external view returns(bool);\r\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "storageLayout",
+          "devdoc",
+          "userdoc",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
