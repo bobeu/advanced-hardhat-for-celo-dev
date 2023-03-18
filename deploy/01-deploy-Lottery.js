@@ -57,13 +57,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 		callBackGasLimit,
 		interval,
 	];
-	console.log("1");
-	console.log(` vrf Address ${vrfCoordinatorV2Address}`)
-	console.log(` entranceFee  ${entranceFee}`)
-	console.log(` gasLane  ${gasLane}`)
-	console.log(` subscription_id  ${subscription_id}`)
-	console.log(` callBackGasLimit  ${callBackGasLimit}`)
-	console.log(` interval,  ${interval}`)
+	
 
 
 	
