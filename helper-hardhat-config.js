@@ -7,7 +7,7 @@ const networkConfig={
         name:"sepolia",
         vrfCoordinatorv2: "0x",  // get from chainlink
         entranceFee: ethers.utils.parseEther("0.01"),
-        gasLane: "0x0", // get from chainlink
+        gasLane: "0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc", // get from chainlink
         subscriptionId:"", // getFrom chainlink
         callBackGasLimit: "500000",
         interval: "30",
@@ -16,7 +16,8 @@ const networkConfig={
         name:"hardhat",
         entranceFee:ethers.utils.parseEther("0.01"),
         callBackGasLimit:"500000",
-        interval:"30"
+        interval:"30",
+        gasLane: "0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc"
     }
 }
 

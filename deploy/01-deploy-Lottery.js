@@ -10,6 +10,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 	const VRF_FUND_AMOUNT = await ethers.utils.parseEther("1");
 	const { deploy, log } = deployments;
 	const { deployer } = await getNamedAccounts();
+	console.log(deployer)
 	let vrfCoordinatorV2Address,
 		subscription_id,
 		callBackGasLimit,
@@ -56,11 +57,22 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 		callBackGasLimit,
 		interval,
 	];
+	console.log("1");
+	console.log(` vrf Address ${vrfCoordinatorV2Address}`)
+	console.log(` entranceFee  ${entranceFee}`)
+	console.log(` gasLane  ${gasLane}`)
+	console.log(` subscription_id  ${subscription_id}`)
+	console.log(` callBackGasLimit  ${callBackGasLimit}`)
+	console.log(` interval,  ${interval}`)
+
+
+	
+
 
 	const lottery = await deploy("Lottery", {
 		from: deployer,
 		log: true,
-		waitConfirmations: network.config.blockConfirmations || 1,
+		aitConfirmations: network.config.blockConfirmations || 1,
 		args: args,
 	});
 
