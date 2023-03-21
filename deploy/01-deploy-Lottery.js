@@ -6,11 +6,12 @@ const {
 const { verify } = require("../utils/verify.js");
 
 //
+
 module.exports = async function ({ getNamedAccounts, deployments }) {
 	const VRF_FUND_AMOUNT = await ethers.utils.parseEther("1");
 	const { deploy, log } = deployments;
 	const { deployer } = await getNamedAccounts();
-	console.log(deployer)
+	console.log(deployer);
 	let vrfCoordinatorV2Address,
 		subscription_id,
 		callBackGasLimit,
@@ -35,6 +36,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 
 		subscription_id = txnReceipt.events[0].args.subId;
 
+
 		await vrfCoordinatorV2Mock.fundSubscription(
 			subscription_id,
 			VRF_FUND_AMOUNT
@@ -51,17 +53,12 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 	}
 	const args = [
 		vrfCoordinatorV2Address,
-		entranceFee,
-		gasLane,
 		subscription_id,
-		callBackGasLimit,
+		gasLane,
 		interval,
+		entranceFee,
+		callBackGasLimit,
 	];
-	
-
-
-	
-
 
 	const lottery = await deploy("Lottery", {
 		from: deployer,
@@ -71,8 +68,11 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 	});
 
 	if (!developmentChains.includes(network.name) && ETHERSCAN_API_KEY) {
-		log("verifying..");
+		log("verifying...");
 		await verify(lottery.address, args);
 	}
 	log("-----------------------------");
 };
+
+module.exports.tags = ["all", "raffle"];
+
