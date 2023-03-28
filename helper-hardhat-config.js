@@ -9,15 +9,15 @@ const networkConfig = {
 		entranceFee: ethers.utils.parseEther("0.01"),
 
 		gasLane:
-			"0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc", 
+			"0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c", 
             // get from chainlink
-		subscriptionId: "0x779877a7b0d9e8603169ddbd7836e478b4624789", // getFrom chainlink
+		subscriptionId: "761", // getFrom chainlink
 		callBackGasLimit: "500000",
 		interval: "30",
 	},
 	31337: {
 		name: "hardhat",
-		entranceFee: ethers.utils.parseEther("0.01"),
+		entranceFee: ethers.utils.parseEther("0.001"),
 		callBackGasLimit: "500000",
 		interval: "30",
 		gasLane:

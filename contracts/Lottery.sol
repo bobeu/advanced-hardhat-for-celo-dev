@@ -91,7 +91,7 @@ contract Lottery is VRFConsumerBaseV2, KeeperCompatibleInterface {
 
     function performUpkeep(
         bytes calldata 
-    ) external override {
+    ) public override {
         (bool upkeepNeeded, ) = checkUpkeep("");
         if (!upkeepNeeded) {
             revert Raffle__UpkeepNotNeeded(
