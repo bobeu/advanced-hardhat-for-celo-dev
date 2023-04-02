@@ -36,6 +36,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 		txnReceipt = await txnResponse.wait(1);
 
 		subscription_id = txnReceipt.events[0].args.subId;
+		console.log(`subscription_Id : ${subscription_id}`)
 
 
 		await vrfCoordinatorV2Mock.fundSubscription( // after adding subscription
