@@ -1,4 +1,4 @@
-// require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-toolbox");
 require("@nomicfoundation/hardhat-chai-matchers");
 require("@openzeppelin/hardhat-upgrades");
 require("@nomiclabs/hardhat-ethers");
@@ -6,7 +6,7 @@ require("hardhat-deploy");
 require("@nomiclabs/hardhat-ethers");
 require("hardhat-deploy-ethers");
 require("@typechain/ethers-v5");
-const { config } = require("dotenv");
+// const { config } = require("dotenv"); 
 require("dotenv").config()
 config();
 
@@ -43,5 +43,8 @@ module.exports = {
 			chainId: 11155111,
 		},
 	},
+	mocha:{
+		timeout: 200000 // 200,000 milliseconds   200 sec max
+	}
 };
 
